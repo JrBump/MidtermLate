@@ -1,5 +1,6 @@
 from itertools import product
 
+
 class VariableElimination:
     def __init__(self,cpts):
         self.cpts = cpts
@@ -18,10 +19,10 @@ class VariableElimination:
 
         results = factors[0]
         for factor in factors[1:]:
-            results = self.mulitply_two_factors(results, factor)
+            results = self.multiply_two_factors(results, factor)
         return results
 
-    def mulitply_two_factors(self,f1,f2):
+    def multiply_two_factors(self, f1, f2):
         common_vars = list(set(f1['vars']) & set(f2['vars']))
         new_vars = list(set(f1['vars'] + f2['vars']))
 
@@ -29,7 +30,7 @@ class VariableElimination:
         assignments = product(*[range(2) for _ in new_vars])
 
         for assignment in assignments:
-            assign_dict = dcit(zip(new_vars, assignment))
+            assign_dict = dict(zip(new_vars, assignment))
             val1 = self.get_factor_value(f1, assign_dict)
             val2 = self.get_factor_value(f2, assign_dict)
             new_factor['table'][tuple(assignment)] = val1 * val2
@@ -81,4 +82,4 @@ class VariableElimination:
     def get_factor_value(self, factor, assignment):
         key = tuple(assignment[var] for var in factor['vars'])
         return factor['table'].get(key,0)
-    
+

@@ -1,4 +1,4 @@
-import numpy as np 
+import numpy as np
 from collections import deque
 
 class BayesianNet:
@@ -73,3 +73,5 @@ class BayesianNet:
                 queue.append((neighbor, new_active))
 
         return True
+
+
